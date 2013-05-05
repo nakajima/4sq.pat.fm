@@ -19,6 +19,13 @@ class FoursquareMap < Sinatra::Base
   set :root, File.dirname(__FILE__)
   set :public, root + "/public"
   
+  helpers do
+    def js_template(name)
+      partial = "_#{name}".to_sym
+      "<script type='text/html' id='_template_#{name}'>#{erb(partial)}</script>"
+    end
+  end
+  
   before do
     p session
   end

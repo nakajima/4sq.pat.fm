@@ -1,0 +1,24 @@
+<div class="venue">
+  <h1>{{ name }} <small>{{ checkinCount }}X</small></h1>
+  
+  {{# categories }}
+    <div class="category">
+      <img src="{{ icon }}" title="{{ name }}">
+      {{ name }}
+    </div>
+  {{/ categories }}
+
+  <div class="shouts">
+    {{# shouts }}
+      <div class="shout">
+        {{ text }}
+      </div>
+    {{/ shouts}}
+  </div>
+  
+  {{^ shouts }}
+    <div class="no-shouts">
+      No shouts.
+    </div>
+  {{/ shouts }}
+</div>

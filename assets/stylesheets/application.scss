@@ -1,0 +1,64 @@
+/*
+ *= require_self
+ */
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%; margin: 0px; padding: 0px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+#map_canvas {
+  height: 100%
+}
+
+h1 {
+  margin: 0;
+  font-size: 16px;
+  
+  small {
+    color: #aaa;
+  }
+}
+
+p {
+  margin: 10px 0 0 0;
+}
+
+.venue {
+  width: 300px;
+}
+
+.category {
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 12px;
+  color: #ccc;
+
+  img {
+    opacity: 0.4;
+    float: left;
+    margin-right: 4px;
+    height: 14px;
+    width: 14px;
+  }
+}
+
+.shouts {
+  color: #777;
+  
+  .shout {
+    margin-top: 8px;
+  }
+}
+
+.no-shouts {
+  margin-top: 10px;
+  color: #aaa;
+}

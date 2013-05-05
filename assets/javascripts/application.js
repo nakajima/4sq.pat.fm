@@ -1,2 +1,5 @@
 //= require_tree ./vendor
-//= require checkin
+//= require template
+//= require venue
+//= require map
+//= require init
