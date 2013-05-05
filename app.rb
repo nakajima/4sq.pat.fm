@@ -50,7 +50,7 @@ class FoursquareMap < Sinatra::Base
     session[:access_token] = Foursquare.get_access_token(params[:code])
     puts "session[:access_token] # => #{session[:access_token]}"
     EM.next_tick { HistoryLoader.new(session).perform }
-    erb :index
+    redirect '/'
   end
 
   get "/reset" do
