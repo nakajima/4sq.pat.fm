@@ -33,6 +33,8 @@
           $('#indicator').progress({ start: '' });
           ping()
           $('#initial').hide();
+        <% else %>
+          alert("No access token")
         <% end %>
       });
     </script>
