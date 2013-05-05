@@ -4,9 +4,9 @@ require "em-http"
 require "quimby"
 require "json"
 require "redis"
-require "lib/credentials"
-require "lib/core_ext"
-require "lib/history_loader"
+require "./lib/credentials"
+require "./lib/core_ext"
+require "./lib/history_loader"
 
 class FoursquareMap < Sinatra::Base
   enable :static
