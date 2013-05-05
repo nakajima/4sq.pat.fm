@@ -2,7 +2,6 @@ require "rubygems"
 require "sinatra"
 require "em-http"
 require "open-uri"
-require "quimby"
 require "json"
 require "redis"
 require "./lib/credentials"
@@ -25,7 +24,7 @@ class FoursquareMap < Sinatra::Base
   end
 
   get "/" do
-    @authorize_url = Foursquare::Base.new(CLIENT_KEY, CLIENT_SECRET).authorize_url(OUR_HOST + "/callback")
+    @authorize_url = Foursquare.authorize_url
     session[:ok] = true
     erb :index
   end

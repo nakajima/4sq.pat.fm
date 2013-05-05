@@ -16,4 +16,8 @@ module Foursquare
     
     JSON.parse(response)['access_token']
   end
+  
+  def self.authorize_url
+    "#{BASE}/oauth2/authenticate?client_id=#{CLIENT_KEY}&response_type=code&redirect_uri=#{OUR_HOST}/callback"
+  end
 end
