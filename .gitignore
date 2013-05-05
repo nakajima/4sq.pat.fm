@@ -1,0 +1,4 @@
+history.json
+old-history.json
+.bundle/*
+database.sqlite3

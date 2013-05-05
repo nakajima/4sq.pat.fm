@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Foursquare History Loader</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <script src="http://code.jquery.com/jquery.js" type="text/javascript"></script>
+    <script src="/jquery.progress.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <a class="about" href="http://twitter.com/nakajima">a nakajima joint</a>
+
+    <div id="loading" style="display:none">
+      <h1>LOADING<span id="indicator">...</span></h1>
+      <p>This could take a minute or so.</p>
+    </div>
+    <div id="initial">
+      <h1>Foursquare History Map</h1>
+      <a id="link-account" href="<%= @authorize_url %>">Link Your Foursquare Account</a>
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        var data;
+
+        function ping() {
+          $.get("/ping", function(response) {
+            if (response) { document.location.pathname = response; }
+            else { window.setTimeout(ping, 1000); }
+          });
+        }
+
+        <% if session[:access_token] %>
+          $('#loading').show();
+          $('#indicator').progress({ start: '' });
+          ping()
+          $('#initial').hide();
+        <% end %>
+      });
+    </script>
+  </body>
+</html>

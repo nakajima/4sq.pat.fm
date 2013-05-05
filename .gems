@@ -1,0 +1,7 @@
+json
+sinatra
+termios
+activerecord
+sqlite3-ruby
+delayed_job --version="1.8.5"
+memcached-northscale
