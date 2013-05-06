@@ -10,6 +10,10 @@ require "./lib/foursquare"
 
 $stdout.sync = true
 
+OUR_HOST = ENV['OUR_HOST'] || "http://localhost:4567"
+CLIENT_KEY = ENV['FOURSQUARE_CLIENT_ID']
+CLIENT_SECRET = ENV['FOURSQUARE_CLIENT_SECRET']
+
 class FoursquareMap < Sinatra::Base
   enable :logging
   enable :static
@@ -19,9 +23,6 @@ class FoursquareMap < Sinatra::Base
   set :public, root + "/public"
   
   configure do
-    OUR_HOST = ENV['OUR_HOST'] || "http://localhost:4567"
-    CLIENT_KEY = ENV['FOURSQUARE_CLIENT_ID']
-    CLIENT_SECRET = ENV['FOURSQUARE_CLIENT_SECRET']
     $redis = Redis.connect(:url => ENV['REDISTOGO_URL'] || "redis://localhost:16379")
   end
   
