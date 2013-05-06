@@ -12,5 +12,4 @@ class @Venue
   html: ->
     @name = @json.name
     @categories = @json.categories
-    console.info @categories
     Template.render "venue", this

@@ -1,5 +1,6 @@
 class @Map
-  constructor: (id) ->
+  constructor: (@element) ->
+    @elementTemplate = $(@element).clone()
     @venues = {}
     @latlng = new google.maps.LatLng(-34.397, 150.644)
     @options = {
@@ -8,11 +9,22 @@ class @Map
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
-    # Google Maps Attributes
-    @map = new google.maps.Map(document.getElementById(id), @options)
+    @init()
+    
+  # Google Maps Attributes
+  init: ->
+    @map = new google.maps.Map(@element, @options)
     @bounds = new google.maps.LatLngBounds()
     @windows = []
 
+  # Kill existing map, replace the canvas element with a clone of the original
+  reset: =>
+    newElement = @elementTemplate.clone()
+    $(@element).replaceWith(newElement)
+    @element = newElement.get(0)
+    @init()
+
+  # Adds a checkin to the checkins array
   addCheckin: (checkin) ->
     return unless checkin.venue
     return unless checkin.venue.name
@@ -23,6 +35,10 @@ class @Map
   buildAllVenues: ->
     for venueId, venue of @venues
       @buildVenue(venue)
+
+  buildFilteredVenues: (filter) ->
+    for venueId, venue of @venues
+      @buildVenue(venue) if filter(venue)
 
   buildVenue: (venue) ->
     infowindow = new google.maps.InfoWindow({ content: venue.html(), boxStyle: { borderRadius: '4px' } })

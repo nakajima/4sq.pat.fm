@@ -1,5 +1,5 @@
 window.init = ->
-  map = new Map("map_canvas")
+  window.map = new Map(document.getElementById "map_canvas")
 
   for checkin in HISTORY
     map.addCheckin(checkin)
