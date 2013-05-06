@@ -19,6 +19,19 @@ class FoursquareMap < Sinatra::Base
   set :root, File.dirname(__FILE__)
   set :public, root + "/public"
   
+  configure do
+    CLIENT_KEY = ENV['FOURSQUARE_CLIENT_ID']
+    CLIENT_SECRET = ENV['FOURSQUARE_CLIENT_SECRET']
+
+    if ENV["RACK_ENV"] == "production"
+      OUR_HOST = "http://4sq.pat.fm"
+      $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
+    else
+      OUR_HOST = "http://localhost:4567"
+      $redis = Redis.connect :url => "redis://localhost:16379"
+    end
+  end
+  
   helpers do
     def js_template(name)
       partial = "_#{name}".to_sym
