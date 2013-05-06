@@ -1,15 +1,12 @@
 class HistoryLoader
   def initialize(session)
-    puts "HistoryLoader#initialize called"
     @session = session
   end
 
   def perform
     request "/users/self" do |json|
-      puts json.inspect
       user = json["user"]
       checkin_count = user["checkins"]["count"].to_i
-      puts "LOADING #{checkin_count} CHECKINS..."
       load_checkins(checkin_count)
     end
   end
@@ -32,7 +29,6 @@ class HistoryLoader
       multi.responses[:callback].values.each do |req|
         checkins += JSON.parse(req.response)["response"]["checkins"]["items"]
       end
-      puts "- found #{checkins.size} checkins"
       set(history_id, checkins)
     end
   end
@@ -51,8 +47,7 @@ class HistoryLoader
 
   def request(path, params={}, &block)
     puts "Requesting: #{path} | #{params.inspect}"
-    puts "access_token: #{access_token}"
-    
+
     params.update :oauth_token => access_token
     http = EventMachine::HttpRequest.new("https://api.foursquare.com/v2" + path).get(:query => params)
     http.callback do
