@@ -14,6 +14,10 @@ OUR_HOST = ENV['OUR_HOST'] || "http://localhost:4567"
 CLIENT_KEY = ENV['FOURSQUARE_CLIENT_ID']
 CLIENT_SECRET = ENV['FOURSQUARE_CLIENT_SECRET']
 
+unless CLIENT_KEY and CLIENT_SECRET
+  abort "\nOof, awkward.\n\nYou're gonna need to set some foursquare keys first.\n\nI recommend you run script/bootstrap.\n\n"
+end
+
 class FoursquareMap < Sinatra::Base
   enable :logging
   enable :static
@@ -21,11 +25,11 @@ class FoursquareMap < Sinatra::Base
 
   set :root, File.dirname(__FILE__)
   set :public, root + "/public"
-  
+
   configure do
     $redis = Redis.connect(:url => ENV['REDISTOGO_URL'] || "redis://localhost:16379")
   end
-  
+
   helpers do
     def js_template(name)
       partial = "_#{name}".to_sym
@@ -38,7 +42,7 @@ class FoursquareMap < Sinatra::Base
     session[:ok] = true
     erb :index
   end
-  
+
   get "/loading" do
     @loading = true
     erb :index

@@ -16,8 +16,6 @@ Make sure the "Redirect URI" is `http://localhost:4567/callback`, like so:
 
 Then do this:
 
-    $ bundle
-    $ export FOURSQUARE_CLIENT_ID=your-foursquare-client-id
-    $ export FOURSQUARE_CLIENT_SECRET=your-foursquare-client-secret
-    $ thin start -p 4567
+    $ script/bootstrap
+    $ script/server
 

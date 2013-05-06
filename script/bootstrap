@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+bundle
+echo
+printf "\e[0;36mCool story bundler. Now you need to enter your foursquare credentials.\e[0m\n"
+printf "\e[0;36mCheck out README.md for more on how to do this. Once you're ready, hit enter.\e[0m"
+read
+echo
+
+read -p "Enter your foursquare client id: " FOURSQUARE_CLIENT_ID
+read -p "Enter your foursquare client secret: " FOURSQUARE_CLIENT_SECRET
+
+echo "\n"
+echo "Ok sweet. Let's try to get the server going."
+
+FOURSQUARE_CLIENT_ID=$FOURSQUARE_CLIENT_ID FOURSQUARE_CLIENT_SECRET=$FOURSQUARE_CLIENT_SECRET script/server

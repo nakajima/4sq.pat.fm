@@ -1,0 +1,3 @@
+#!/bin/sh
+
+thin start -p 4567
