@@ -64,7 +64,8 @@ class FoursquareMap < Sinatra::Base
   end
 
   get "/callback" do
-    puts "got to callback"
+    # Just grab a random ID to look up the history later. Using rand is a bulletproof method
+    # that always guarantees a unique result. Always. Never fails. Ever.
     session[:history_id] = rand(10000)
     session[:access_token] = Foursquare.get_access_token(params[:code])
     puts "session[:access_token] # => #{session[:access_token]}"
