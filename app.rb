@@ -4,7 +4,6 @@ require "em-http"
 require "open-uri"
 require "json"
 require "redis"
-require "./lib/credentials"
 require "./lib/core_ext"
 require "./lib/history_loader"
 require "./lib/foursquare"
@@ -20,16 +19,10 @@ class FoursquareMap < Sinatra::Base
   set :public, root + "/public"
   
   configure do
+    OUR_HOST = ENV['OUR_HOST'] || "http://localhost:4567"
     CLIENT_KEY = ENV['FOURSQUARE_CLIENT_ID']
     CLIENT_SECRET = ENV['FOURSQUARE_CLIENT_SECRET']
-
-    if ENV["RACK_ENV"] == "production"
-      OUR_HOST = "http://4sq.pat.fm"
-      $redis = Redis.connect(:url => ENV['REDISTOGO_URL'])
-    else
-      OUR_HOST = "http://localhost:4567"
-      $redis = Redis.connect :url => "redis://localhost:16379"
-    end
+    $redis = Redis.connect(:url => ENV['REDISTOGO_URL'] || "redis://localhost:16379")
   end
   
   helpers do
