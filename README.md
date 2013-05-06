@@ -6,6 +6,8 @@ http://4sq.pat.fm
 
 ### development ###
 
+[![Code Climate](https://codeclimate.com/github/nakajima/4sq.pat.fm.png)](https://codeclimate.com/github/nakajima/4sq.pat.fm)
+
 You'll need to register a Foursquare app for local development: https://foursquare.com/developers/register
 
 Make sure the "Redirect URI" is `http://localhost:4567/callback`, like so:
