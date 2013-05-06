@@ -3,6 +3,7 @@ class HistoryLoader
     @session = session
   end
 
+  # Grab the user that owns the access token, then load all the checkins.
   def perform
     request "/users/self" do |json|
       user = json["user"]
@@ -13,6 +14,7 @@ class HistoryLoader
 
   private
 
+  # Load all the checkins, then jam them into redis with the key passed in from the `session`
   def load_checkins(checkin_count)
     multi = EventMachine::MultiRequest.new
     0.upto((checkin_count / 250) + 1) do |offset|
@@ -45,6 +47,7 @@ class HistoryLoader
     end
   end
 
+  # Make a request to foursquare, then call the block with the response.
   def request(path, params={}, &block)
     puts "Requesting: #{path} | #{params.inspect}"
 
