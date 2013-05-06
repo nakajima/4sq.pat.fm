@@ -32,10 +32,6 @@ class FoursquareMap < Sinatra::Base
       "<script type='text/html' id='_template_#{name}'>#{erb(partial)}</script>"
     end
   end
-  
-  before do
-    p session
-  end
 
   get "/" do
     @authorize_url = Foursquare.authorize_url
