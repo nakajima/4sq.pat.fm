@@ -42,6 +42,11 @@ class FoursquareMap < Sinatra::Base
     session[:ok] = true
     erb :index
   end
+  
+  get "/loading" do
+    @loading = true
+    erb :index
+  end
 
   get "/map" do
     if history = $redis.get(session[:history_id])
@@ -64,7 +69,7 @@ class FoursquareMap < Sinatra::Base
     session[:access_token] = Foursquare.get_access_token(params[:code])
     puts "session[:access_token] # => #{session[:access_token]}"
     EM.next_tick { HistoryLoader.new(session).perform }
-    redirect '/'
+    redirect '/loading'
   end
 
   get "/reset" do

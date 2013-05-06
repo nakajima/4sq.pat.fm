@@ -28,7 +28,7 @@
           });
         }
 
-        <% if session[:access_token] %>
+        <% if @loading %>
           $('#loading').show();
           $('#indicator').progress({ start: '' });
           ping()
