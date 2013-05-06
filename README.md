@@ -16,6 +16,5 @@ Make sure the "Redirect URI" is `http://localhost:4567/callback`, like so:
 
 Then do this:
 
-    $ script/bootstrap
-    $ script/server
+    $ script/kick-it
 
